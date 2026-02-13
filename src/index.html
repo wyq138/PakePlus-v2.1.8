@@ -1,11 +1,1205 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>PakePlus</title>
-    </head>
-    <body>
-        Hello World
-    </body>
+
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>动物医院诊疗管理系统</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+            touch-action: manipulation;
+        }
+        :root {
+            --primary: #165DFF;
+            --light-blue: #E8F3FF;
+            --white: #FFFFFF;
+            --gray: #F5F7FA;
+            --text: #333333;
+            --border: #DCDFE6;
+        }
+        body {
+            background-color: var(--gray);
+            color: var(--text);
+            min-height: 100vh;
+            background: url('https://img1.baidu.com/it/u=3804267959,2738637299&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500') no-repeat center center fixed;
+            background-size: cover;
+            background-attachment: fixed;
+        }
+        .container {
+            width: 100%;
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 10px;
+        }
+        .login-box {
+            width: 90%;
+            max-width: 450px;
+            margin: 50px auto;
+            background: var(--white);
+            padding: 25px;
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.1);
+            border-top: 4px solid var(--primary);
+        }
+        .login-box h2 {
+            text-align: center;
+            color: var(--primary);
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+        }
+        .login-box .input-group {
+            margin: 12px 0;
+        }
+        .login-box select, .login-box input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            margin-top: 5px;
+        }
+        .login-box .add-account {
+            text-align: right;
+            margin-top: 8px;
+            font-size: 14px;
+            color: var(--primary);
+            cursor: pointer;
+        }
+        .btn {
+            padding: 10px 16px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+            touch-action: manipulation;
+        }
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+            flex: 1;
+        }
+        .btn-secondary {
+            background: var(--light-blue);
+            color: var(--primary);
+            flex: 1;
+        }
+        .btn-sm {
+            padding: 8px 12px;
+            font-size: 14px;
+        }
+        .main-page {
+            display: none;
+            background: var(--white);
+            border-radius: 8px;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.08);
+            overflow: hidden;
+            width: 100%;
+        }
+        .header {
+            background: var(--primary);
+            color: var(--white);
+            padding: 12px 15px;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            align-items: center;
+            gap: 10px;
+        }
+        .header h3 {
+            font-weight: 600;
+            font-size: 16px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .header .user-info {
+            font-size: 14px;
+            padding: 4px 8px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 4px;
+        }
+        .header .btn-group {
+            display: flex;
+            gap: 8px;
+        }
+        .tab-nav {
+            display: flex;
+            background: var(--light-blue);
+            overflow-x: auto;
+            border-bottom: 1px solid var(--border);
+            -webkit-overflow-scrolling: touch;
+        }
+        .tab-nav .tab-item {
+            padding: 12px 15px;
+            cursor: pointer;
+            white-space: nowrap;
+            border-bottom: 2px solid transparent;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 14px;
+        }
+        .tab-nav .tab-item i, .tab-nav .tab-item span.emoji {
+            font-size: 14px;
+        }
+        .tab-nav .tab-item.active {
+            border-bottom-color: var(--primary);
+            color: var(--primary);
+            font-weight: 500;
+        }
+        .tab-content {
+            padding: 15px;
+            min-height: 500px;
+            display: none;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .form-group {
+            margin: 12px 0;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        .form-control, .form-select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            resize: vertical;
+            font-size: 14px;
+        }
+        .form-row {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .form-col {
+            flex: 1;
+            min-width: 180px;
+        }
+        .card {
+            background: var(--gray);
+            padding: 12px;
+            border-radius: 6px;
+            margin: 8px 0;
+        }
+        .list {
+            margin-top: 15px;
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+        .list-header {
+            background: var(--light-blue);
+            padding: 10px;
+            display: flex;
+            justify-content: space-between;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        .list-item {
+            padding: 12px 10px;
+            border-bottom: 1px solid var(--border);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .list-item:active {
+            background: var(--light-blue);
+        }
+        .footer {
+            text-align: center;
+            padding: 12px;
+            background: var(--light-blue);
+            color: var(--text);
+            margin-top: 15px;
+            border-top: 1px solid var(--border);
+            font-size: 13px;
+        }
+        .hidden {
+            display: none !important;
+        }
+        .modal {
+            position: fixed;
+            top:0;
+            left:0;
+            width:100%;
+            height:100%;
+            background: rgba(0,0,0,0.5);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
+            padding: 10px;
+        }
+        .modal-content {
+            background: var(--white);
+            width: 100%;
+            max-width: 600px;
+            padding: 20px;
+            border-radius: 8px;
+            border-top:4px solid var(--primary);
+        }
+        .modal-title {
+            color: var(--primary);
+            margin-bottom: 12px;
+            padding-bottom:8px;
+            border-bottom:1px solid var(--border);
+            display: flex;
+            align-items: center;
+            gap:6px;
+            font-size: 16px;
+        }
+        .modal-body {
+            line-height: 1.8;
+            margin:8px 0;
+            font-size: 14px;
+        }
+        .modal-footer {
+            text-align: right;
+            margin-top:15px;
+        }
+        .search-box {
+            margin: 12px 0;
+            display: flex;
+            gap:8px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .search-input {
+            flex:1;
+            min-width: 200px;
+            padding:10px;
+            border:1px solid var(--border);
+            border-radius:4px;
+            font-size: 14px;
+        }
+        .chart-box {
+            width:100%;
+            height:350px;
+            margin:15px 0;
+            border:1px solid var(--border);
+            border-radius:4px;
+        }
+        .record-template {
+            width:100%;
+            padding:15px;
+            background: #fff;
+            border:1px solid var(--border);
+            border-radius:4px;
+            margin:10px 0;
+            line-height: 1.8;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- 登录页面 -->
+        <div class="login-box" id="loginPage">
+            <h2><i class="fa fa-heartbeat"></i> 动物医院诊疗管理系统登录</h2>
+            <div class="input-group">
+                <label>选择账号</label>
+                <select id="accountSelect" class="form-select"></select>
+            </div>
+            <div class="input-group">
+                <label>登录密码</label>
+                <input type="password" id="loginPwd" placeholder="请输入账号密码">
+            </div>
+            <div class="add-account" onclick="showAddAccount()">新增医生账号</div>
+            <div class="input-group hidden" id="addAccountBox">
+                <label>账号名称</label>
+                <input type="text" id="newAccount" placeholder="如：李医生">
+                <label style="margin-top:8px;">账号密码</label>
+                <input type="password" id="newPwd" placeholder="设置登录密码">
+                <label style="margin-top:8px;">账号等级</label>
+                <select id="newLevel" class="form-select">
+                    <option value="doctor">普通医生</option>
+                    <option value="admin">管理员</option>
+                </select>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-secondary" onclick="importAllData()"><i class="fa fa-upload"></i> 导入账号</button>
+                <button class="btn btn-primary" id="mainBtn" onclick="handleLogin()">登录系统</button>
+            </div>
+        </div>
+
+        <!-- 主页面 -->
+        <div class="main-page" id="mainPage">
+            <div class="header">
+                <h3><i class="fa fa-hospital-o"></i> 动物医院诊疗管理系统</h3>
+                <div class="user-info" id="currentUser">当前登录：暂无</div>
+                <div class="btn-group">
+                    <button class="btn btn-sm btn-secondary" onclick="showTab('personal')"><i class="fa fa-user"></i> 个人设置</button>
+                    <button class="btn btn-sm btn-secondary" onclick="exportAllData()"><i class="fa fa-download"></i> 导出账号</button>
+                    <button class="btn btn-sm btn-secondary" onclick="logout()"><i class="fa fa-sign-out"></i> 退出</button>
+                </div>
+            </div>
+
+            <div class="tab-nav" id="mainTabNav">
+                <div class="tab-item active doctor-tab" onclick="switchTab('outpatient')"><i class="fa fa-stethoscope"></i> 门诊病人</div>
+                <div class="tab-item doctor-tab" onclick="switchTab('emergency')"><i class="fa fa-ambulance"></i> 急诊病人</div>
+                <div class="tab-item doctor-tab" onclick="switchTab('hospitalized')"><i class="fa fa-bed"></i> 住院病人</div>
+                <div class="tab-item doctor-tab" onclick="switchTab('bed')"><i class="fa fa-building-o"></i> 床位管理</div>
+                <div class="tab-item doctor-tab" onclick="switchTab('operation')"><i class="fa fa-scissors"></i> 手术管理</div>
+                <div class="tab-item doctor-tab" onclick="switchTab('autopsy')"><i class="fa fa-search"></i> 尸检管理</div>
+                <div class="tab-item doctor-tab" onclick="switchTab('death')"><i class="fa fa-times-circle"></i> 死亡病人</div>
+                <div class="tab-item doctor-tab" onclick="switchTab('medicalRecord')"><i class="fa fa-file-text-o"></i> 病历管理</div>
+                <div class="tab-item doctor-tab" onclick="switchTab('file')"><i class="fa fa-file-medical-o"></i> 病理/检查报告</div>
+                <div class="tab-item doctor-tab" onclick="switchTab('check')"><i class="fa fa-flask"></i> 检查开单</div>
+                <div class="tab-item admin-tab hidden" onclick="switchTab('doctor')"><span class="emoji">👨‍⚕️</span> 医生管理</div>
+                <div class="tab-item admin-tab hidden" onclick="switchTab('statistics')"><i class="fa fa-bar-chart"></i> 数据分析</div>
+            </div>
+
+            <!-- 门诊病人 -->
+            <div class="tab-content active doctor-tab" id="outpatient">
+                <h4><i class="fa fa-stethoscope"></i> 门诊病人录入</h4>
+                <div class="form-row">
+                    <div class="form-col"><div class="form-group"><label>动物姓名</label><input class="form-control" id="outName"></div><div class="form-group"><label>动物种类</label><input class="form-control" id="outType"></div></div>
+                    <div class="form-col"><div class="form-group"><label>主人姓名</label><input class="form-control" id="outOwner"></div><div class="form-group"><label>联系电话</label><input class="form-control" id="outPhone"></div></div>
+                </div>
+                <div class="form-group"><label>症状描述</label><textarea class="form-control" id="outSymptom" rows="2"></textarea></div>
+                <h5>开药记录</h5>
+                <div class="form-row">
+                    <div class="form-col"><label>药品名称</label><input class="form-control" id="outDrugName"></div>
+                    <div class="form-col"><label>剂量</label><select class="form-select" id="outDrugDose"><option>1mg</option><option>2mg</option><option>5mg</option><option>10mg</option><option>20mg</option></select></div>
+                    <div class="form-col"><label>服用方式</label><select class="form-select" id="outDrugWay"><option>口服</option><option>肌注</option><option>静注</option><option>外用</option><option>皮下注射</option></select></div>
+                </div>
+                <h5>医生医嘱</h5>
+                <div class="form-row">
+                    <div class="form-col"><label>医嘱名称</label><input class="form-control" id="outAdvName"></div>
+                    <div class="form-col"><label>剂量</label><select class="form-select" id="outAdvDose"><option>1次/天</option><option>2次/天</option><option>1次/2天</option><option>1次/3天</option></select></div>
+                    <div class="form-col"><label>执行方式</label><select class="form-select" id="outAdvWay"><option>居家执行</option><option>门诊执行</option></select></div>
+                </div>
+                <button class="btn btn-primary" onclick="addData('outpatient')">添加门诊病人</button>
+                <div class="list" id="outpatientList"></div>
+            </div>
+
+            <!-- 急诊病人 -->
+            <div class="tab-content doctor-tab" id="emergency">
+                <h4><i class="fa fa-ambulance"></i> 急诊病人录入</h4>
+                <div class="form-row">
+                    <div class="form-col"><div class="form-group"><label>动物姓名</label><input class="form-control" id="emName"></div><div class="form-group"><label>动物种类</label><input class="form-control" id="emType"></div></div>
+                    <div class="form-col"><div class="form-group"><label>主人姓名</label><input class="form-control" id="emOwner"></div><div class="form-group"><label>联系电话</label><input class="form-control" id="emPhone"></div></div>
+                </div>
+                <div class="form-group"><label>急诊症状</label><textarea class="form-control" id="emSymptom" rows="2"></textarea></div>
+                <h5>开药记录</h5>
+                <div class="form-row">
+                    <div class="form-col"><label>药品名称</label><input class="form-control" id="emDrugName"></div>
+                    <div class="form-col"><label>剂量</label><select class="form-select" id="emDrugDose"><option>1mg</option><option>2mg</option><option>5mg</option><option>10mg</option><option>20mg</option></select></div>
+                    <div class="form-col"><label>服用方式</label><select class="form-select" id="emDrugWay"><option>口服</option><option>肌注</option><option>静注</option><option>外用</option><option>皮下注射</option></select></div>
+                </div>
+                <h5>医生医嘱</h5>
+                <div class="form-row">
+                    <div class="form-col"><label>医嘱名称</label><input class="form-control" id="emAdvName"></div>
+                    <div class="form-col"><label>剂量</label><select class="form-select" id="emAdvDose"><option>1次/天</option><option>2次/天</option><option>1次/2天</option></select></div>
+                    <div class="form-col"><label>执行方式</label><select class="form-select" id="emAdvWay"><option>急诊执行</option><option>住院执行</option></select></div>
+                </div>
+                <button class="btn btn-primary" onclick="addData('emergency')">添加急诊病人</button>
+                <div class="list" id="emergencyList"></div>
+            </div>
+
+            <!-- 住院病人 -->
+            <div class="tab-content doctor-tab" id="hospitalized">
+                <h4><i class="fa fa-bed"></i> 住院病人录入</h4>
+                <div class="form-row">
+                    <div class="form-col"><div class="form-group"><label>动物姓名</label><input class="form-control" id="hosName"></div><div class="form-group"><label>动物种类</label><input class="form-control" id="hosType"></div></div>
+                    <div class="form-col"><div class="form-group"><label>主人姓名</label><input class="form-control" id="hosOwner"></div><div class="form-group"><label>床位号</label><input class="form-control" id="hosBed"></div></div>
+                </div>
+                <div class="form-group"><label>诊断结果</label><textarea class="form-control" id="hosDiagnose" rows="2"></textarea></div>
+                <h5>开药记录</h5>
+                <div class="form-row">
+                    <div class="form-col"><label>药品名称</label><input class="form-control" id="hosDrugName"></div>
+                    <div class="form-col"><label>剂量</label><select class="form-select" id="hosDrugDose"><option>1mg</option><option>2mg</option><option>5mg</option><option>10mg</option><option>20mg</option></select></div>
+                    <div class="form-col"><label>服用方式</label><select class="form-select" id="hosDrugWay"><option>口服</option><option>肌注</option><option>静注</option><option>外用</option><option>皮下注射</option></select></div>
+                </div>
+                <h5>护士输液医嘱</h5>
+                <div class="form-row">
+                    <div class="form-col"><label>液体名称</label><input class="form-control" id="hosFluidName"></div>
+                    <div class="form-col"><label>剂量</label><select class="form-select" id="hosFluidDose"><option>50ml</option><option>100ml</option><option>250ml</option><option>500ml</option></select></div>
+                    <div class="form-col"><label>输注方式</label><select class="form-select" id="hosFluidWay"><option>静滴</option><option>静推</option><option>泵注</option></select></div>
+                </div>
+                <button class="btn btn-primary" onclick="addData('hospitalized')">添加住院病人</button>
+                <div class="list" id="hospitalizedList"></div>
+            </div>
+
+            <!-- 床位管理（核心优化：先加床位再入住） -->
+            <div class="tab-content doctor-tab" id="bed">
+                <h4><i class="fa fa-building-o"></i> 床位信息录入（先加床位，再点床位入住）</h4>
+                <div class="form-row">
+                    <div class="form-col">
+                        <div class="form-group"><label>床位号</label><input class="form-control" id="bedNo" placeholder="如：1、2、3..."></div>
+                    </div>
+                    <div class="form-col">
+                        <div class="form-group"><label>初始状态</label>
+                            <select class="form-select" id="bedStatus">
+                                <option value="空闲">空闲</option>
+                                <option value="占用">占用</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary" onclick="addData('bed')">添加床位</button>
+                <div class="list" id="bedList"></div>
+            </div>
+
+            <!-- 手术管理 -->
+            <div class="tab-content doctor-tab" id="operation">
+                <h4><i class="fa fa-scissors"></i> 手术信息录入</h4>
+                <div class="form-row">
+                    <div class="form-col"><div class="form-group"><label>动物姓名</label><input class="form-control" id="opName"></div><div class="form-group"><label>手术名称</label><input class="form-control" id="opType"></div></div>
+                    <div class="form-col"><div class="form-group"><label>主刀医生</label><input class="form-control" id="opDoctor"></div><div class="form-group"><label>手术日期</label><input type="date" class="form-control" id="opDate"></div></div>
+                </div>
+                <div class="form-group"><label>手术描述</label><textarea class="form-control" id="opDesc" rows="2"></textarea></div>
+                <h5>术后用药记录</h5>
+                <div class="form-row">
+                    <div class="form-col"><label>药品名称</label><input class="form-control" id="opDrugName"></div>
+                    <div class="form-col"><label>剂量</label><select class="form-select" id="opDrugDose"><option>1mg</option><option>2mg</option><option>5mg</option><option>10mg</option><option>20mg</option></select></div>
+                    <div class="form-col"><label>服用方式</label><select class="form-select" id="opDrugWay"><option>口服</option><option>肌注</option><option>静注</option><option>外用</option><option>皮下注射</option></select></div>
+                </div>
+                <button class="btn btn-primary" onclick="addData('operation')">添加手术记录</button>
+                <div class="list" id="operationList"></div>
+            </div>
+
+            <!-- 尸检管理 -->
+            <div class="tab-content doctor-tab" id="autopsy">
+                <h4><i class="fa fa-search"></i> 尸检信息录入</h4>
+                <div class="form-row">
+                    <div class="form-col"><div class="form-group"><label>动物姓名</label><input class="form-control" id="auName"></div><div class="form-group"><label>动物种类</label><input class="form-control" id="auType"></div></div>
+                    <div class="form-col"><div class="form-group"><label>尸检医生</label><input class="form-control" id="auDoctor"></div><div class="form-group"><label>尸检日期</label><input type="date" class="form-control" id="auDate"></div></div>
+                </div>
+                <div class="form-group"><label>尸检结论</label><textarea class="form-control" id="auResult" rows="2"></textarea></div>
+                <button class="btn btn-primary" onclick="addData('autopsy')">添加尸检记录</button>
+                <div class="list" id="autopsyList"></div>
+            </div>
+
+            <!-- 死亡病人 -->
+            <div class="tab-content doctor-tab" id="death">
+                <h4><i class="fa fa-times-circle"></i> 死亡病人录入</h4>
+                <div class="form-row">
+                    <div class="form-col"><div class="form-group"><label>动物姓名</label><input class="form-control" id="deName"></div><div class="form-group"><label>动物种类</label><input class="form-control" id="deType"></div></div>
+                    <div class="form-col"><div class="form-group"><label>主人姓名</label><input class="form-control" id="deOwner"></div><div class="form-group"><label>死亡日期</label><input type="date" class="form-control" id="deDate"></div></div>
+                </div>
+                <div class="form-group"><label>死亡原因</label><textarea class="form-control" id="deReason" rows="2"></textarea></div>
+                <button class="btn btn-primary" onclick="addData('death')">添加死亡病人</button>
+                <div class="list" id="deathList"></div>
+            </div>
+
+            <!-- 病历管理-模板 -->
+            <div class="tab-content doctor-tab" id="medicalRecord">
+                <h4><i class="fa fa-file-text-o"></i> 病历管理（按动物姓名搜索）</h4>
+                <div class="search-box">
+                    <input type="text" class="search-input" id="mrSearch" placeholder="输入动物姓名查询/生成病历">
+                    <button class="btn btn-primary btn-sm" onclick="searchMedicalRecord()">搜索/生成</button>
+                </div>
+                <div class="record-template" id="recordTemplate">
+                    <h5 style="text-align:center;">XX动物医院 门诊病历记录</h5>
+                    <p>动物姓名：<span id="tplName">--</span>  动物种类：<span id="tplType">--</span>  主人姓名：<span id="tplOwner">--</span>  联系电话：<span id="tplPhone">--</span></p>
+                    <p>接诊医生：<span id="tplDoctor">--</span>  接诊日期：<span id="tplDate">--</span></p>
+                    <p>症状描述：<span id="tplSymptom">--</span></p>
+                    <p>诊断结果：<span id="tplDiagnose">--</span></p>
+                    <p>开药记录：<span id="tplDrug">--</span></p>
+                    <p>医嘱内容：<span id="tplAdvice">--</span></p>
+                    <p>复查建议：<textarea class="form-control" id="tplReview" rows="1" placeholder="填写复查建议"></textarea></p>
+                </div>
+                <button class="btn btn-primary" onclick="saveMedicalRecord()">保存病历</button>
+                <div class="list" id="medicalRecordList"></div>
+            </div>
+
+            <!-- 病理/检查报告 -->
+            <div class="tab-content doctor-tab" id="file">
+                <h4><i class="fa fa-file-medical-o"></i> 病理报告导入</h4>
+                <input type="file" id="reportFile" class="form-control" accept=".pdf,.doc,.docx,.txt,.jpg,.png">
+                <button class="btn btn-primary" onclick="uploadFile('report')">导入病理报告</button>
+                <h4 style="margin-top:15px;"><i class="fa fa-picture-o"></i> 尸检/手术图片上传</h4>
+                <input type="file" id="imgFile" class="form-control" accept="image/*">
+                <button class="btn btn-primary" onclick="uploadFile('image')">上传图片</button>
+                <h4 style="margin-top:15px;"><i class="fa fa-file-text-o"></i> 检查报告上传</h4>
+                <input type="file" id="checkFile" class="form-control" accept=".pdf,.doc,.docx,.txt,.jpg,.png">
+                <button class="btn btn-primary" onclick="uploadFile('checkReport')">上传检查报告</button>
+                <div class="list" id="fileList"></div>
+            </div>
+
+            <!-- 检查开单 -->
+            <div class="tab-content doctor-tab" id="check">
+                <h4><i class="fa fa-flask"></i> 检查开单录入</h4>
+                <div class="form-row">
+                    <div class="form-col"><div class="form-group"><label>动物姓名</label><input class="form-control" id="chkName"></div><div class="form-group"><label>检查医生</label><input class="form-control" id="chkDoctor"></div></div>
+                    <div class="form-col"><div class="form-group"><label>选择检查项</label><select class="form-select" id="chkType" onchange="customCheck()"><option>血细胞计数</option><option>粪便常规</option><option>尿常规</option><option>生化全套</option><option>X光检查</option><option>B超检查</option><option>病原学检测</option><option>自定义检查</option></select></div><div class="form-group"><label>自定义检查名称</label><input class="form-control" id="chkCustom" placeholder="选择自定义时填写" disabled></div></div>
+                </div>
+                <div class="form-group"><label>检查备注</label><textarea class="form-control" id="chkRemark" rows="2" placeholder="检查要求、注意事项等"></textarea></div>
+                <button class="btn btn-primary" onclick="addData('check')">保存检查开单</button>
+                <div class="list" id="checkList"></div>
+            </div>
+
+            <!-- 医生管理-仅管理员 -->
+            <div class="tab-content admin-tab hidden" id="doctor">
+                <h4><span class="emoji">👨‍⚕️</span> 医生信息录入</h4>
+                <div class="form-row">
+                    <div class="form-col"><div class="form-group"><label>医生姓名</label><input class="form-control" id="docName"></div><div class="form-group"><label>职称</label><input class="form-control" id="docTitle"></div></div>
+                    <div class="form-col"><div class="form-group"><label>科室</label><input class="form-control" id="docDept"></div><div class="form-group"><label>联系电话</label><input class="form-control" id="docPhone"></div></div>
+                </div>
+                <button class="btn btn-primary" onclick="addData('doctor')">添加医生</button>
+                <div class="list" id="doctorList"></div>
+            </div>
+
+            <!-- 个人设置 -->
+            <div class="tab-content" id="personal">
+                <h4><i class="fa fa-user"></i> 密码修改</h4>
+                <div class="form-group"><label>原登录密码</label><input type="password" class="form-control" id="oldLoginPwd"></div>
+                <div class="form-group"><label>新登录密码</label><input type="password" class="form-control" id="newLoginPwd"></div>
+                <button class="btn btn-primary" onclick="updatePwd('login')">修改登录密码</button>
+                <div id="adminPwdBox" class="hidden">
+                    <h4 style="margin-top:15px;"><i class="fa fa-lock"></i> 后台密码修改</h4>
+                    <div class="form-group"><label>原后台密码</label><input type="password" class="form-control" id="oldAdminPwd"></div>
+                    <div class="form-group"><label>新后台密码</label><input type="password" class="form-control" id="newAdminPwd"></div>
+                    <button class="btn btn-primary" onclick="updatePwd('admin')">修改后台密码</button>
+                </div>
+                <h4 style="margin-top:15px;"><i class="fa fa-trash"></i> 数据管理</h4>
+                <button class="btn btn-secondary" onclick="clearAllData()">清空所有本地数据（谨慎）</button>
+            </div>
+
+            <!-- 数据分析-仅管理员 -->
+            <div class="tab-content admin-tab hidden" id="statistics">
+                <h4><i class="fa fa-bar-chart"></i> 诊疗数据统计（扇形图）</h4>
+                <div class="chart-box" id="statChart"></div>
+                <div class="form-row" style="margin-top:15px;">
+                    <div class="form-col"><div class="card"><p>门诊总数：<span id="outCount">0</span></p></div></div>
+                    <div class="form-col"><div class="card"><p>急诊总数：<span id="emCount">0</span></p></div></div>
+                    <div class="form-col"><div class="card"><p>住院总数：<span id="hosCount">0</span></p></div></div>
+                    <div class="form-col"><div class="card"><p>死亡总数：<span id="deCount">0</span></p></div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 床位入住弹窗（新增） -->
+    <div class="modal" id="bedInModal">
+        <div class="modal-content">
+            <h3 class="modal-title"><i class="fa fa-bed"></i> 床位入住登记</h3>
+            <input type="hidden" id="currentBedNo">
+            <div class="modal-body">
+                <div class="form-group"><label>动物姓名</label><input class="form-control" id="inAnimalName" placeholder="输入入住动物姓名"></div>
+                <div class="form-group"><label>动物种类</label><input class="form-control" id="inAnimalType" placeholder="如：犬、猫"></div>
+                <div class="form-group"><label>主人姓名</label><input class="form-control" id="inOwnerName" placeholder="输入主人姓名"></div>
+                <div class="form-group"><label>联系电话</label><input class="form-control" id="inPhone" placeholder="输入联系电话"></div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary btn-sm" onclick="closeModal()">取消</button>
+                <button class="btn btn-primary btn-sm" onclick="submitBedIn()">确认入住</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 通用详情弹窗 -->
+    <div class="modal" id="detailModal">
+        <div class="modal-content">
+            <h3 class="modal-title" id="modalTitle">记录详情</h3>
+            <div class="modal-body" id="modalBody"></div>
+            <div class="modal-footer"><button class="btn btn-primary btn-sm" onclick="closeModal()">关闭</button></div>
+        </div>
+    </div>
+
+    <!-- 底部关于 -->
+    <div class="footer">
+        <p>关于系统 | 开发者：平武县软件系统开发有限公司 | 联系电话：18281970402</p>
+    </div>
+
+    <script>
+        // 初始化基础数据+缓存DOM提速
+        function initLocalStorage() {
+            // 确保localStorage可用
+            try {
+                // 测试localStorage是否可用
+                localStorage.setItem('test', 'test');
+                localStorage.removeItem('test');
+                
+                // 初始化默认账号数据
+                if(!localStorage.getItem('accounts')) {
+                    localStorage.setItem('accounts', JSON.stringify([{name:'管理员',pwd:'admin888',level:'admin'},{name:'普通医生',pwd:'123456',level:'doctor'}]));
+                }
+                if(!localStorage.getItem('loginPwd')) {
+                    localStorage.setItem('loginPwd', '123456');
+                }
+                if(!localStorage.getItem('adminPwd')) {
+                    localStorage.setItem('adminPwd', 'admin888');
+                }
+            } catch (e) {
+                console.error('localStorage初始化失败:', e);
+                alert('本地存储初始化失败，可能导致数据无法保存！');
+            }
+        }
+        
+        // 安全的localStorage操作函数
+        function safeLocalStorageSet(key, value) {
+            try {
+                localStorage.setItem(key, value);
+                return true;
+            } catch (e) {
+                console.error('localStorage写入失败:', e);
+                return false;
+            }
+        }
+        
+        function safeLocalStorageGet(key, defaultValue) {
+            try {
+                return localStorage.getItem(key) || defaultValue;
+            } catch (e) {
+                console.error('localStorage读取失败:', e);
+                return defaultValue;
+            }
+        }
+        
+        // 初始化localStorage
+        initLocalStorage();
+        
+        let isAdmin = false, currentUser = '', myChart = null, currentBedIndex = -1;
+        // 缓存常用DOM元素
+        const $accountSelect = document.getElementById('accountSelect'), $addAccountBox = document.getElementById('addAccountBox'), $mainBtn = document.getElementById('mainBtn');
+        
+        // 页面加载时检查登录状态
+        window.onload = function() {
+            // 初始化账号选择框
+            initAccountSelect();
+            
+            const savedLogin = localStorage.getItem('currentLogin');
+            if(savedLogin) {
+                const loginInfo = JSON.parse(savedLogin);
+                const accounts = JSON.parse(localStorage.getItem('accounts') || '[]');
+                const user = accounts.find(item => item.name === loginInfo.name);
+                if(user && user.pwd === loginInfo.pwd) {
+                    isAdmin = user.level === 'admin';
+                    currentUser = user.name;
+                    document.getElementById('loginPage').style.display = 'none';
+                    document.getElementById('mainPage').style.display = 'block';
+                    document.getElementById('currentUser').innerText = `当前登录：${currentUser}（${isAdmin?'管理员':'医生'}）`;
+                    if(isAdmin) {
+                        document.querySelectorAll('.doctor-tab').forEach(item => item.classList.add('hidden'));
+                        document.querySelectorAll('.admin-tab').forEach(item => item.classList.remove('hidden'));
+                        document.getElementById('adminPwdBox').classList.remove('hidden');
+                    } else {
+                        document.querySelectorAll('.doctor-tab').forEach(item => item.classList.remove('hidden'));
+                        document.querySelectorAll('.admin-tab').forEach(item => item.classList.add('hidden'));
+                        document.getElementById('adminPwdBox').classList.add('hidden');
+                    }
+                    loadAllLists();
+                }
+            }
+        };
+
+        // 初始化账号选择框-显纯账号名
+        function initAccountSelect() {
+            const accounts = JSON.parse(localStorage.getItem('accounts') || '[]');
+            $accountSelect.innerHTML = accounts.map((item, i) => `<option value="${i}">${item.name}（${item.level==='admin'?'管理员':'医生'}）</option>`).join('');
+        }
+        initAccountSelect();
+
+        // 显示新增账号框+切换按钮为保存
+        function showAddAccount() {
+            $addAccountBox.classList.toggle('hidden');
+            $mainBtn.innerText = $addAccountBox.classList.contains('hidden') ? '登录系统' : '保存账号';
+            $mainBtn.onclick = $addAccountBox.classList.contains('hidden') ? handleLogin : saveNewAccount;
+        }
+
+        // 保存新账号-自动本地存+隐藏输入框+刷新下拉
+        function saveNewAccount() {
+            const name = document.getElementById('newAccount').value.trim(), pwd = document.getElementById('newPwd').value.trim(), level = document.getElementById('newLevel').value;
+            if(!name || !pwd) return alert('账号和密码不能为空！');
+            
+            try {
+                const accounts = JSON.parse(safeLocalStorageGet('accounts', '[]'));
+                accounts.push({name, pwd, level});
+                
+                if(safeLocalStorageSet('accounts', JSON.stringify(accounts))) {
+                    initAccountSelect();
+                    alert('账号保存成功！');
+                    $addAccountBox.classList.add('hidden');
+                    $mainBtn.innerText = '登录系统';
+                    $mainBtn.onclick = handleLogin;
+                    document.getElementById('newAccount').value = '';
+                    document.getElementById('newPwd').value = '';
+                } else {
+                    alert('账号保存失败，请重试！');
+                }
+            } catch (e) {
+                console.error('保存账号失败:', e);
+                alert('账号保存失败，请重试！');
+            }
+        }
+
+        // 登录处理
+        function handleLogin() {
+            const accountIdx = $accountSelect.value, inputPwd = document.getElementById('loginPwd').value;
+            
+            try {
+                const accounts = JSON.parse(safeLocalStorageGet('accounts', '[]'));
+                const user = accounts[accountIdx];
+                
+                if(!user) {
+                    alert('账号不存在！');
+                    return;
+                }
+                
+                if(user.pwd !== inputPwd) {
+                    return alert('密码错误！');
+                }
+                
+                currentUser = user.name;
+                isAdmin = user.level === 'admin';
+                
+                // 保存登录状态到localStorage
+                if(safeLocalStorageSet('currentLogin', JSON.stringify({name: user.name, pwd: user.pwd, level: user.level}))) {
+                    document.getElementById('loginPage').style.display = 'none';
+                    document.getElementById('mainPage').style.display = 'block';
+                    document.getElementById('currentUser').innerText = `当前登录：${currentUser}（${isAdmin?'管理员':'医生'}）`;
+                    if(isAdmin) {
+                        document.querySelectorAll('.doctor-tab').forEach(item => item.classList.add('hidden'));
+                        document.querySelectorAll('.admin-tab').forEach(item => item.classList.remove('hidden'));
+                        document.getElementById('adminPwdBox').classList.remove('hidden');
+                    } else {
+                        document.querySelectorAll('.doctor-tab').forEach(item => item.classList.remove('hidden'));
+                        document.querySelectorAll('.admin-tab').forEach(item => item.classList.add('hidden'));
+                        document.getElementById('adminPwdBox').classList.add('hidden');
+                    }
+                    loadAllLists();
+                } else {
+                    alert('登录状态保存失败，请重试！');
+                }
+            } catch (e) {
+                console.error('登录处理失败:', e);
+                alert('登录处理失败，请重试！');
+            }
+        }
+
+        // 切换标签页-权限校验
+        function switchTab(tabId) {
+            if((tabId === 'doctor' || tabId === 'statistics') && !isAdmin) return alert('无管理员权限！');
+            document.querySelectorAll('.tab-item').forEach(item => item.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(item => item.classList.remove('active'));
+            event.target?.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+            if(tabId === 'statistics' && isAdmin) initChart();
+        }
+
+        function showTab(tabId) {
+            if((tabId === 'doctor' || tabId === 'statistics') && !isAdmin) return alert('无管理员权限！');
+            document.querySelectorAll('.tab-item').forEach(item => item.classList.remove('active'));
+            document.querySelectorAll('.tab-content').forEach(item => item.classList.remove('active'));
+            const tabItem = document.querySelector(`.tab-item[onclick="switchTab('${tabId}')"]`);
+            tabItem?.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+            if(tabId === 'statistics' && isAdmin) initChart();
+        }
+
+        // 退出登录
+        function logout() {
+            try {
+                // 清除登录状态
+                localStorage.removeItem('currentLogin');
+                document.getElementById('mainPage').style.display = 'none';
+                document.getElementById('loginPage').style.display = 'block';
+                document.getElementById('loginPwd').value = '';
+                isAdmin = false; currentUser = '';
+                // 重新初始化账号选择框
+                initAccountSelect();
+            } catch (e) {
+                console.error('退出登录失败:', e);
+                // 即使localStorage操作失败，也要切换到登录页面
+                document.getElementById('mainPage').style.display = 'none';
+                document.getElementById('loginPage').style.display = 'block';
+                document.getElementById('loginPwd').value = '';
+                isAdmin = false; currentUser = '';
+                initAccountSelect();
+            }
+        }
+
+        // 自定义检查项切换
+        function customCheck() {
+            const chkType = document.getElementById('chkType').value, customInput = document.getElementById('chkCustom');
+            customInput.disabled = chkType !== '自定义检查';
+            customInput.placeholder = chkType === '自定义检查' ? '请输入检查名称' : '选择自定义时填写';
+        }
+
+        // 添加数据-全自动本地存储
+        function addData(type) {
+            let data = {}; const now = new Date().toLocaleString();
+            switch(type) {
+                case 'outpatient': data = {name:document.getElementById('outName').value, type:document.getElementById('outType').value, owner:document.getElementById('outOwner').value, phone:document.getElementById('outPhone').value, symptom:document.getElementById('outSymptom').value, drug:`${document.getElementById('outDrugName').value} ${document.getElementById('outDrugDose').value} ${document.getElementById('outDrugWay').value}`, advice:`${document.getElementById('outAdvName').value} ${document.getElementById('outAdvDose').value} ${document.getElementById('outAdvWay').value}`, time:now}; break;
+                case 'emergency': data = {name:document.getElementById('emName').value, type:document.getElementById('emType').value, owner:document.getElementById('emOwner').value, phone:document.getElementById('emPhone').value, symptom:document.getElementById('emSymptom').value, drug:`${document.getElementById('emDrugName').value} ${document.getElementById('emDrugDose').value} ${document.getElementById('emDrugWay').value}`, advice:`${document.getElementById('emAdvName').value} ${document.getElementById('emAdvDose').value} ${document.getElementById('emAdvWay').value}`, time:now}; break;
+                case 'hospitalized': data = {name:document.getElementById('hosName').value, type:document.getElementById('hosType').value, owner:document.getElementById('hosOwner').value, bed:document.getElementById('hosBed').value, diagnose:document.getElementById('hosDiagnose').value, drug:`${document.getElementById('hosDrugName').value} ${document.getElementById('hosDrugDose').value} ${document.getElementById('hosDrugWay').value}`, fluid:`${document.getElementById('hosFluidName').value} ${document.getElementById('hosFluidDose').value} ${document.getElementById('hosFluidWay').value}`, time:now}; break;
+                case 'bed': data = {no:document.getElementById('bedNo').value, status:document.getElementById('bedStatus').value, animal:'', owner:'', phone:'', type:'', time:now}; break;
+                case 'operation': data = {name:document.getElementById('opName').value, type:document.getElementById('opType').value, doctor:document.getElementById('opDoctor').value, date:document.getElementById('opDate').value, desc:document.getElementById('opDesc').value, drug:`${document.getElementById('opDrugName').value} ${document.getElementById('opDrugDose').value} ${document.getElementById('opDrugWay').value}`, time:now}; break;
+                case 'autopsy': data = {name:document.getElementById('auName').value, type:document.getElementById('auType').value, doctor:document.getElementById('auDoctor').value, date:document.getElementById('auDate').value, result:document.getElementById('auResult').value, time:now}; break;
+                case 'death': data = {name:document.getElementById('deName').value, type:document.getElementById('deType').value, owner:document.getElementById('deOwner').value, date:document.getElementById('deDate').value, reason:document.getElementById('deReason').value, time:now}; break;
+                case 'medicalRecord': data = {name:document.getElementById('tplName').innerText, content:document.getElementById('recordTemplate').innerHTML, doctor:currentUser, time:now}; break;
+                case 'doctor': data = {name:document.getElementById('docName').value, title:document.getElementById('docTitle').value, dept:document.getElementById('docDept').value, phone:document.getElementById('docPhone').value, time:now}; break;
+                case 'check': const chkType = document.getElementById('chkType').value; const checkName = chkType === '自定义检查' ? document.getElementById('chkCustom').value : chkType; data = {name:document.getElementById('chkName').value, type:checkName, doctor:document.getElementById('chkDoctor').value, remark:document.getElementById('chkRemark').value, time:now}; break;
+            }
+            const list = JSON.parse(localStorage.getItem(type) || '[]');
+            list.push(data); localStorage.setItem(type, JSON.stringify(list));
+            loadList(type); clearInput(type); isAdmin && initChart();
+            // 同步到云端
+            syncDataToCloud();
+        }
+
+        // 清空输入框
+        function clearInput(type) {
+            const prefixes = {outpatient:'out', emergency:'em', hospitalized:'hos', bed:'bed', operation:'op', autopsy:'au', death:'de', check:'chk', doctor:'doc'};
+            const prefix = prefixes[type];
+            if(prefix) document.querySelectorAll(`[id^="${prefix}"]`).forEach(el => el.value = el.tagName === 'SELECT' ? el.options[0].value : '');
+        }
+
+        // 上传报告/图片
+        function uploadFile(type) {
+            const fileInput = type === 'report' ? document.getElementById('reportFile') : type === 'image' ? document.getElementById('imgFile') : document.getElementById('checkFile');
+            const file = fileInput.files[0];
+            if(!file) return alert('请选择文件！');
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const data = {name:file.name, type, size:(file.size/1024).toFixed(2)+'KB', base64:e.target.result, time:new Date().toLocaleString()};
+                const list = JSON.parse(localStorage.getItem('files') || '[]');
+                list.push(data); localStorage.setItem('files', JSON.stringify(list));
+                loadList('file'); fileInput.value = '';
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // 加载单个列表-核心：床位点击弹入住框
+        function loadList(type) {
+            const listEl = document.getElementById(`${type === 'file' ? 'file' : type}List`);
+            const storageKey = type === 'file' ? 'files' : type;
+            const list = JSON.parse(localStorage.getItem(storageKey) || '[]');
+            if(list.length === 0){listEl.innerHTML = '<div class="list-item">暂无数据</div>'; return;}
+
+            // 床位列表特殊处理：点击弹入住框
+            if(type === 'bed'){
+                listEl.innerHTML = list.map((item, i) => `
+                    <div class="list-item" onclick="openBedInModal(${i})">
+                        <div>床位${item.no} - ${item.status} - 入住：${item.animal||'无'}</div>
+                        <div>
+                            <button class="btn btn-sm btn-secondary" onclick="event.stopPropagation();dischargeBed(${i})">出院</button>
+                            <button class="btn btn-sm btn-secondary" onclick="event.stopPropagation();deleteItem('${storageKey}', ${i})">删除</button>
+                        </div>
+                    </div>
+                `).join('');
+                return;
+            }
+
+            listEl.innerHTML = list.map((item, i) => `<div class="list-item" onclick="showDetail('${storageKey}', ${i})"><div>${item.name || item.no || '记录'} - ${item.time}</div><button class="btn btn-sm btn-secondary" onclick="event.stopPropagation();deleteItem('${storageKey}', ${i})">删除</button></div>`).join('');
+        }
+
+        // 打开床位入住弹窗（核心新功能）
+        function openBedInModal(index) {
+            const list = JSON.parse(localStorage.getItem('bed') || '[]');
+            const bed = list[index];
+            
+            // 检查床位状态，如果已被占用，显示详情而不是入住弹窗
+            if(bed.status === '占用') {
+                showDetail('bed', index);
+                return;
+            }
+            
+            currentBedIndex = index;
+            document.getElementById('currentBedNo').value = bed.no;
+            document.getElementById('inAnimalName').value = '';
+            document.getElementById('inAnimalType').value = '';
+            document.getElementById('inOwnerName').value = '';
+            document.getElementById('inPhone').value = '';
+            document.getElementById('bedInModal').style.display = 'flex';
+        }
+
+        // 提交床位入住信息
+        function submitBedIn() {
+            const animal = document.getElementById('inAnimalName').value.trim();
+            const type = document.getElementById('inAnimalType').value.trim();
+            const owner = document.getElementById('inOwnerName').value.trim();
+            const phone = document.getElementById('inPhone').value.trim();
+            if(!animal) return alert('请输入入住动物姓名！');
+            
+            const list = JSON.parse(localStorage.getItem('bed') || '[]');
+            const bed = list[currentBedIndex];
+            list[currentBedIndex].animal = animal;
+            list[currentBedIndex].type = type;
+            list[currentBedIndex].owner = owner;
+            list[currentBedIndex].phone = phone;
+            list[currentBedIndex].status = '占用';
+            list[currentBedIndex].time = new Date().toLocaleString();
+            localStorage.setItem('bed', JSON.stringify(list));
+            
+            // 同时添加到住院患者管理中
+            const hospitalizedList = JSON.parse(localStorage.getItem('hospitalized') || '[]');
+            const now = new Date().toLocaleString();
+            hospitalizedList.push({
+                name: animal,
+                type: type,
+                owner: owner,
+                bed: bed.no,
+                diagnose: '待填写',
+                drug: '无',
+                fluid: '无',
+                time: now
+            });
+            localStorage.setItem('hospitalized', JSON.stringify(hospitalizedList));
+            
+            loadList('bed');
+            loadList('hospitalized');
+            closeModal();
+            alert('入住登记成功！');
+            // 同步到云端
+            syncDataToCloud();
+        }
+
+        // 床位出院
+        function dischargeBed(index) {
+            const list = JSON.parse(localStorage.getItem('bed') || '[]');
+            list[index].animal = '';
+            list[index].owner = '';
+            list[index].phone = '';
+            list[index].type = '';
+            list[index].status = '空闲';
+            list[index].time = new Date().toLocaleString();
+            localStorage.setItem('bed', JSON.stringify(list));
+            loadList('bed');
+            alert('出院成功！床位已空闲');
+            // 同步到云端
+            syncDataToCloud();
+        }
+
+        // 显示详情弹窗
+        function showDetail(storageKey, index) {
+            const list = JSON.parse(localStorage.getItem(storageKey) || '[]'), item = list[index];
+            let title = '', content = '';
+            switch(storageKey){
+                case 'outpatient': title='门诊详情'; content=`动物：${item.name} 种类：${item.type} 主人：${item.owner} 电话：${item.phone} 症状：${item.symptom} 用药：${item.drug} 医嘱：${item.advice} 时间：${item.time}`; break;
+                case 'emergency': title='急诊详情'; content=`动物：${item.name} 种类：${item.type} 主人：${item.owner} 电话：${item.phone} 症状：${item.symptom} 用药：${item.drug} 医嘱：${item.advice} 时间：${item.time}`; break;
+                case 'hospitalized': title='住院详情'; content=`动物：${item.name} 种类：${item.type} 主人：${item.owner} 床位：${item.bed} 诊断：${item.diagnose} 用药：${item.drug} 输液：${item.fluid} 时间：${item.time}`; break;
+                case 'bed': title='床位详情'; content=`床位号：${item.no} 状态：${item.status} 入住动物：${item.animal||'无'} 动物种类：${item.type||'无'} 主人：${item.owner||'无'} 电话：${item.phone||'无'} 更新：${item.time}`; break;
+                case 'operation': title='手术详情'; content=`动物：${item.name} 手术：${item.type} 医生：${item.doctor} 日期：${item.date} 描述：${item.desc} 用药：${item.drug} 时间：${item.time}`; break;
+                case 'autopsy': title='尸检详情'; content=`动物：${item.name} 种类：${item.type} 医生：${item.doctor} 日期：${item.date} 结论：${item.result} 时间：${item.time}`; break;
+                case 'death': title='死亡详情'; content=`动物：${item.name} 种类：${item.type} 主人：${item.owner} 日期：${item.date} 原因：${item.reason} 时间：${item.time}`; break;
+                case 'medicalRecord': title='病历详情'; content=`动物：${item.name} 医生：${item.doctor} 内容：${item.content} 时间：${item.time}`; break;
+                case 'doctor': title='医生详情'; content=`姓名：${item.name} 职称：${item.title} 科室：${item.dept} 电话：${item.phone} 时间：${item.time}`; break;
+                case 'check': title='检查详情'; content=`动物：${item.name} 检查项：${item.type} 医生：${item.doctor} 备注：${item.remark} 时间：${item.time}`; break;
+                case 'files': title=item.type==='report'?'病理报告':item.type==='image'?'图片':'检查报告'; content=`名称：${item.name} 类型：${item.type} 大小：${item.size} 时间：${item.time} <br>预览：<a href="${item.base64}" target="_blank">点击打开</a>`; break;
+                default: title='记录详情'; content=JSON.stringify(item);
+            }
+            document.getElementById('modalTitle').innerText = title;
+            document.getElementById('modalBody').innerHTML = content;
+            document.getElementById('detailModal').style.display = 'flex';
+        }
+
+        // 关闭所有弹窗
+        function closeModal() {
+            document.getElementById('detailModal').style.display = 'none';
+            document.getElementById('bedInModal').style.display = 'none';
+        }
+
+        // 病历搜索+模板填充
+        function searchMedicalRecord() {
+            const keyword = document.getElementById('mrSearch').value.trim();
+            if(!keyword) return alert('请输入动物姓名！');
+            const outList = JSON.parse(localStorage.getItem('outpatient')||'[]').find(i=>i.name.includes(keyword)), now = new Date().toLocaleDateString();
+            document.getElementById('tplName').innerText = outList?.name || keyword;
+            document.getElementById('tplType').innerText = outList?.type || '未知';
+            document.getElementById('tplOwner').innerText = outList?.owner || '未知';
+            document.getElementById('tplPhone').innerText = outList?.phone || '未知';
+            document.getElementById('tplDoctor').innerText = currentUser;
+            document.getElementById('tplDate').innerText = now;
+            document.getElementById('tplSymptom').innerText = outList?.symptom || '待填写';
+            document.getElementById('tplDiagnose').innerText = outList?.diagnose || '待填写';
+            document.getElementById('tplDrug').innerText = outList?.drug || '无';
+            document.getElementById('tplAdvice').innerText = outList?.advice || '无';
+            loadList('medicalRecord');
+        }
+
+        // 保存病历
+        function saveMedicalRecord() {addData('medicalRecord'); alert('病历保存成功！');}
+
+        // 加载所有列表
+        function loadAllLists() {
+            ['outpatient','emergency','hospitalized','bed','operation','autopsy','death','medicalRecord','doctor','check','file'].forEach(type => loadList(type));
+        }
+
+        // 删除数据
+        function deleteItem(type, index) {
+            const list = JSON.parse(localStorage.getItem(type) || '[]');
+            list.splice(index, 1); localStorage.setItem(type, JSON.stringify(list));
+            loadList(type === 'files' ? 'file' : type); isAdmin && initChart();
+            // 同步到云端
+            syncDataToCloud();
+        }
+
+        // 修改密码
+        function updatePwd(type) {
+            if(type === 'admin' && !isAdmin) return alert('无权限！');
+            const oldPwd = document.getElementById(`old${type==='login'?'Login':'Admin'}Pwd`).value;
+            const newPwd = document.getElementById(`new${type==='login'?'Login':'Admin'}Pwd`).value;
+            if(!newPwd) return alert('新密码不能为空！');
+            if(oldPwd !== localStorage.getItem(`${type}Pwd`)) return alert('原密码错误！');
+            localStorage.setItem(`${type}Pwd`, newPwd);
+            alert(type==='login'?'登录密码修改成功':'后台密码修改成功');
+            logout();
+        }
+
+        // 导入数据
+        function importAllData() {
+            const input = document.createElement('input');
+            input.type = 'file'; input.accept = '.json';
+            input.onchange = function(e) {
+                const file = e.target.files[0]; const reader = new FileReader();
+                reader.onload = function(ev) {
+                    try {
+                        const data = JSON.parse(ev.target.result);
+                        
+                        // 检查导入的数据格式是否正确
+                        if(!data.account) {
+                            // 兼容旧格式
+                            for(let key in data) {
+                                localStorage.setItem(key, typeof data[key] === 'string' ? data[key] : JSON.stringify(data[key]));
+                            }
+                            alert('数据导入成功！');
+                            loadAllLists();
+                            initAccountSelect();
+                            isAdmin && initChart();
+                        } else {
+                            // 新格式：包含账号信息和患者数据
+                            // 导入所有账号信息
+                            if(data.allAccounts) {
+                                localStorage.setItem('accounts', JSON.stringify(data.allAccounts));
+                            }
+                            
+                            // 导入当前登录账号信息
+                            localStorage.setItem('currentLogin', JSON.stringify(data.account));
+                            
+                            // 导入患者数据
+                            for(let key in data.patients) {
+                                if(data.patients[key]) {
+                                    localStorage.setItem(key, JSON.stringify(data.patients[key]));
+                                }
+                            }
+                            
+                            // 导入文件数据
+                            if(data.files) {
+                                localStorage.setItem('files', JSON.stringify(data.files));
+                            }
+                            
+                            // 刷新界面
+                            loadAllLists();
+                            initAccountSelect();
+                            isAdmin && initChart();
+                            
+                            // 自动登录
+                            const loginInfo = data.account;
+                            currentUser = loginInfo.name;
+                            isAdmin = loginInfo.level === 'admin';
+                            document.getElementById('loginPage').style.display = 'none';
+                            document.getElementById('mainPage').style.display = 'block';
+                            document.getElementById('currentUser').innerText = `当前登录：${currentUser}（${isAdmin?'管理员':'医生'}）`;
+                            
+                            if(isAdmin) {
+                                document.querySelectorAll('.doctor-tab').forEach(item => item.classList.add('hidden'));
+                                document.querySelectorAll('.admin-tab').forEach(item => item.classList.remove('hidden'));
+                                document.getElementById('adminPwdBox').classList.remove('hidden');
+                            } else {
+                                document.querySelectorAll('.doctor-tab').forEach(item => item.classList.remove('hidden'));
+                                document.querySelectorAll('.admin-tab').forEach(item => item.classList.add('hidden'));
+                                document.getElementById('adminPwdBox').classList.add('hidden');
+                            }
+                            
+                            alert('账号数据导入成功！已自动登录并加载所有患者信息。');
+                        }
+                    } catch(err) {
+                        alert('导入失败！请选择正确的账号数据文件。');
+                        console.error(err);
+                    }
+                };
+                reader.readAsText(file);
+            };
+            input.click();
+        }
+        
+        // 导出数据
+        function exportAllData() {
+            const currentLogin = localStorage.getItem('currentLogin');
+            if(!currentLogin) {
+                alert('请先登录后再导出数据！');
+                return;
+            }
+            
+            const loginInfo = JSON.parse(currentLogin);
+            const username = loginInfo.name;
+            
+            // 导出所有账号信息和相关数据
+            const data = {
+                account: loginInfo,
+                allAccounts: JSON.parse(localStorage.getItem('accounts') || '[]'),
+                patients: {
+                    outpatient: JSON.parse(localStorage.getItem('outpatient') || '[]'),
+                    emergency: JSON.parse(localStorage.getItem('emergency') || '[]'),
+                    hospitalized: JSON.parse(localStorage.getItem('hospitalized') || '[]'),
+                    bed: JSON.parse(localStorage.getItem('bed') || '[]'),
+                    operation: JSON.parse(localStorage.getItem('operation') || '[]'),
+                    autopsy: JSON.parse(localStorage.getItem('autopsy') || '[]'),
+                    death: JSON.parse(localStorage.getItem('death') || '[]'),
+                    medicalRecord: JSON.parse(localStorage.getItem('medicalRecord') || '[]'),
+                    doctor: JSON.parse(localStorage.getItem('doctor') || '[]'),
+                    check: JSON.parse(localStorage.getItem('check') || '[]')
+                },
+                files: JSON.parse(localStorage.getItem('files') || '[]'),
+                exportDate: new Date().toISOString()
+            };
+            
+            // 创建下载链接
+            const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `doctor-${username}-data-${new Date().toISOString().slice(0,10)}.json`;
+            a.click();
+            URL.revokeObjectURL(url);
+            alert('账号数据导出成功！包含所有账号信息和患者数据。');
+        }
+
+        // 清空数据
+        function clearAllData() {
+            if(confirm('清空所有数据？不可恢复！')) {
+                localStorage.clear();
+                localStorage.setItem('accounts', JSON.stringify([{name:'管理员',pwd:'admin888',level:'admin'},{name:'普通医生',pwd:'123456',level:'doctor'}]));
+                localStorage.setItem('loginPwd', '123456'); localStorage.setItem('adminPwd', 'admin888');
+                loadAllLists(); initAccountSelect(); alert('数据已清空！');
+            }
+        }
+
+        // 图表延迟初始化-提速
+        function initChart() {
+            const outCount = JSON.parse(localStorage.getItem('outpatient')||'[]').length;
+            const emCount = JSON.parse(localStorage.getItem('emergency')||'[]').length;
+            const hosCount = JSON.parse(localStorage.getItem('hospitalized')||'[]').length;
+            const deCount = JSON.parse(localStorage.getItem('death')||'[]').length;
+            document.getElementById('outCount').innerText = outCount;
+            document.getElementById('emCount').innerText = emCount;
+            document.getElementById('hosCount').innerText = hosCount;
+            document.getElementById('deCount').innerText = deCount;
+            if(!myChart) myChart = echarts.init(document.getElementById('statChart'));
+            myChart.setOption({
+                title: {text: '诊疗分布统计', left: 'center'}, tooltip: {trigger: 'item'}, legend: {orient: 'vertical', left: 'left'},
+                series: [{name:'数量',type:'pie',radius:['40%','70%'],data:[{value:outCount,name:'门诊'},{value:emCount,name:'急诊'},{value:hosCount,name:'住院'},{value:deCount,name:'死亡'}],label:{show:true,formatter:'{b}:{c}({d}%)'}}]
+            });
+            window.onresize = () => myChart.resize();
+        }
+    </script>
+</body>
 </html>
