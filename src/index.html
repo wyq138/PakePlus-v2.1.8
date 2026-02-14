@@ -1162,15 +1162,31 @@
                 exportDate: new Date().toISOString()
             };
             
-            // 创建下载链接
-            const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = `doctor-${username}-data-${new Date().toISOString().slice(0,10)}.json`;
-            a.click();
-            URL.revokeObjectURL(url);
-            alert('账号数据导出成功！包含所有账号信息和患者数据。');
+            try {
+                // 创建下载链接
+                const blob = new Blob([JSON.stringify(data, null, 2)], {type: 'application/json'});
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                
+                // 使用更明显的文件名
+                const dateStr = new Date().toISOString().slice(0,10);
+                const fileName = `动物诊疗系统-账号数据-${dateStr}.json`;
+                a.download = fileName;
+                
+                // 模拟点击下载
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                
+                URL.revokeObjectURL(url);
+                
+                // 添加更详细的提示信息
+                alert(`账号数据导出成功！\n\n文件名称：${fileName}\n保存位置：浏览器默认下载文件夹\n\n文件包含：所有账号信息、患者数据和文件记录`);
+            } catch (e) {
+                console.error('导出数据失败:', e);
+                alert('导出数据失败，请重试！');
+            }
         }
 
         // 清空数据
