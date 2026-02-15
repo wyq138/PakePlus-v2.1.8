@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>模板编辑 - 动物医院单据管理系统</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="auth-check.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                    <circle cx="20" cy="20" r="18" stroke="url(#gradient)" stroke-width="3"/>
+                    <path d="M12 20C12 16.5 14 14 16 14C18 14 19 16 19 18" stroke="url(#gradient)" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M28 20C28 16.5 26 14 24 14C22 14 21 16 21 18" stroke="url(#gradient)" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M15 26C15 26 18 28 20 28C22 28 25 26 25 26" stroke="url(#gradient)" stroke-width="2.5" stroke-linecap="round"/>
+                    <defs>
+                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#667eea"/>
+                            <stop offset="100%" style="stop-color:#764ba2"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span>动物医院单据系统</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link">首页</a>
+                <a href="about.html" class="nav-link">关于</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="template-editor">
+        <div class="editor-header">
+            <h1 id="template-title">就诊登记表</h1>
+            <div class="editor-actions">
+                <button class="btn-secondary" onclick="clearForm()">清空内容</button>
+                <button class="btn-primary" onclick="printTemplate()">打印单据</button>
+                <button class="btn-secondary" onclick="goBack()">返回首页</button>
+            </div>
+        </div>
+
+        <div class="editor-content" id="template-content">
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>联系方式</h4>
+                <p>电话：18281970402</p>
+                <p>邮箱：zjhwyq123456@qq.com</p>
+            </div>
+            <div class="footer-section">
+                <h4>开发者</h4>
+                <p>平武县软件开发有限公司</p>
+            </div>
+            <div class="footer-section">
+                <h4>关于</h4>
+                <a href="about.html">了解更多</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 平武县软件开发有限公司 版权所有</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+    <script src="auth.js"></script>
+</body>
+</html>
