@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>就诊协议 - 动物医院模板中心</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="auth-check.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#4ade80',
+                        secondary: '#16a34a',
+                        accent: '#fbbf24',
+                        dark: '#1e293b',
+                        light: '#f8fafc'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .text-shadow {
+                text-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            }
+            .transition-all-300 {
+                transition: all 300ms ease-in-out;
+            }
+            .template-border {
+                border: 1px solid #e5e7eb;
+            }
+            .template-shadow {
+                box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 font-sans">
+    <div class="flex min-h-screen">
+        <!-- 左侧导航栏 -->
+        <aside class="w-64 bg-dark text-white shadow-lg fixed h-full overflow-y-auto">
+            <!--  logo -->
+            <div class="p-4 border-b border-gray-700">
+                <h1 class="text-2xl font-bold text-primary flex items-center">
+                    <i class="fa fa-heartbeat mr-2"></i>
+                    动物医院模板中心
+                </h1>
+                <p class="text-xs text-gray-400 mt-1">专业模板 · 轻松使用</p>
+            </div>
+            
+            <!-- 导航菜单 -->
+            <nav class="mt-6">
+                <div class="px-4 py-2 text-xs font-semibold text-gray-400 uppercase tracking-wider">
+                    主要导航
+                </div>
+                <a href="index.html" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all-300">
+                    <i class="fa fa-home w-6"></i>
+                    <span>首页</span>
+                </a>
+                
+                <div class="px-4 py-2 text-xs font-semibold text-gray-400 uppercase tracking-wider mt-6">
+                    协议模板
+                </div>
+                <a href="agreement-consultation.html" class="flex items-center px-4 py-3 bg-gray-700 text-white transition-all-300">
+                    <i class="fa fa-file-text-o w-6"></i>
+                    <span>就诊协议</span>
+                </a>
+                <a href="agreement-surgery.html" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all-300">
+                    <i class="fa fa-file-text-o w-6"></i>
+                    <span>手术协议</span>
+                </a>
+                <a href="agreement-anesthesia.html" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all-300">
+                    <i class="fa fa-file-text-o w-6"></i>
+                    <span>麻醉协议</span>
+                </a>
+                <a href="agreement-euthanasia.html" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all-300">
+                    <i class="fa fa-file-text-o w-6"></i>
+                    <span> euthanasia协议</span>
+                </a>
+                <a href="agreement-boarding.html" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all-300">
+                    <i class="fa fa-file-text-o w-6"></i>
+                    <span>寄养协议</span>
+                </a>
+                <a href="agreement-grooming.html" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all-300">
+                    <i class="fa fa-file-text-o w-6"></i>
+                    <span>美容协议</span>
+                </a>
+                <a href="agreement-dentistry.html" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all-300">
+                    <i class="fa fa-file-text-o w-6"></i>
+                    <span>牙科治疗协议</span>
+                </a>
+                <a href="agreement-imaging.html" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all-300">
+                    <i class="fa fa-file-text-o w-6"></i>
+                    <span>影像学检查协议</span>
+                </a>
+                
+                <div class="px-4 py-2 text-xs font-semibold text-gray-400 uppercase tracking-wider mt-6">
+                    检查单模板
+                </div>
+                <a href="checkup-general.html" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all-300">
+                    <i class="fa fa-stethoscope w-6"></i>
+                    <span>一般健康检查</span>
+                </a>
+                <a href="checkup-vaccine.html" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all-300">
+                    <i class="fa fa-stethoscope w-6"></i>
+                    <span>疫苗接种记录</span>
+                </a>
+                <a href="checkup-blood.html" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all-300">
+                    <i class="fa fa-stethoscope w-6"></i>
+                    <span>血液检查报告</span>
+                </a>
+                <a href="checkup-urine.html" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all-300">
+                    <i class="fa fa-stethoscope w-6"></i>
+                    <span>尿液检查报告</span>
+                </a>
+                <a href="checkup-fecal.html" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all-300">
+                    <i class="fa fa-stethoscope w-6"></i>
+                    <span>粪便检查报告</span>
+                </a>
+                <a href="checkup-dental.html" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all-300">
+                    <i class="fa fa-stethoscope w-6"></i>
+                    <span>口腔检查报告</span>
+                </a>
+                <a href="checkup-skin.html" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all-300">
+                    <i class="fa fa-stethoscope w-6"></i>
+                    <span>皮肤检查报告</span>
+                </a>
+                <a href="checkup-orthopedic.html" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all-300">
+                    <i class="fa fa-stethoscope w-6"></i>
+                    <span>骨科检查报告</span>
+                </a>
+                <a href="checkup-geriatric.html" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all-300">
+                    <i class="fa fa-stethoscope w-6"></i>
+                    <span>老年动物健康检查</span>
+                </a>
+                <a href="checkup-puppy.html" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all-300">
+                    <i class="fa fa-stethoscope w-6"></i>
+                    <span>幼犬/ kitten健康检查</span>
+                </a>
+                
+                <div class="px-4 py-2 text-xs font-semibold text-gray-400 uppercase tracking-wider mt-6">
+                    单据模板
+                </div>
+                <a href="receipt-invoice.html" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all-300">
+                    <i class="fa fa-receipt w-6"></i>
+                    <span>收费单</span>
+                </a>
+                <a href="receipt-prescription.html" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all-300">
+                    <i class="fa fa-receipt w-6"></i>
+                    <span>处方单</span>
+                </a>
+                <a href="receipt-admission.html" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all-300">
+                    <i class="fa fa-receipt w-6"></i>
+                    <span>入院登记表</span>
+                </a>
+                <a href="receipt-discharge.html" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all-300">
+                    <i class="fa fa-receipt w-6"></i>
+                    <span>出院小结</span>
+                </a>
+                <a href="receipt-death.html" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all-300">
+                    <i class="fa fa-receipt w-6"></i>
+                    <span>死亡证明</span>
+                </a>
+                <a href="receipt-medical.html" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all-300">
+                    <i class="fa fa-receipt w-6"></i>
+                    <span>病历记录</span>
+                </a>
+                <a href="receipt-referral.html" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all-300">
+                    <i class="fa fa-receipt w-6"></i>
+                    <span>转诊单</span>
+                </a>
+                <a href="receipt-certificate.html" class="flex items-center px-4 py-3 text-gray-300 hover:bg-gray-700 hover:text-white transition-all-300">
+                    <i class="fa fa-receipt w-6"></i>
+                    <span>健康证明</span>
+                </a>
+            </nav>
+        </aside>
+        
+        <!-- 主内容区 -->
+        <main class="flex-1 ml-64 p-8">
+            <!-- 顶部标题 -->
+            <div class="mb-8">
+                <div class="flex items-center justify-between">
+                    <div>
+                        <h2 class="text-3xl font-bold text-gray-800 text-shadow">就诊协议</h2>
+                        <p class="text-gray-600 mt-2">动物医院就诊服务协议模板</p>
+                    </div>
+                    <div class="flex space-x-2">
+                        <button class="bg-primary text-white px-4 py-2 rounded hover:bg-secondary transition-all-300 flex items-center">
+                            <i class="fa fa-download mr-2"></i>
+                            下载模板
+                        </button>
+                        <button class="bg-gray-700 text-white px-4 py-2 rounded hover:bg-gray-800 transition-all-300 flex items-center">
+                            <i class="fa fa-print mr-2"></i>
+                            打印
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 模板内容 -->
+            <div class="bg-white rounded-lg shadow-lg p-6 mb-8">
+                <div class="template-border template-shadow bg-white p-8 rounded">
+                    <!-- 协议标题 -->
+                    <div class="text-center mb-8">
+                        <h1 class="text-2xl font-bold">动物医院就诊服务协议</h1>
+                        <p class="text-gray-600 mt-2">AGREEMENT FOR VETERINARY SERVICES</p>
+                    </div>
+                    
+                    <!-- 基本信息 -->
+                    <div class="mb-8">
+                        <h2 class="text-lg font-bold mb-4 border-b pb-2">基本信息</h2>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <p class="text-sm font-medium">医院名称：</p>
+                                <p class="border-b py-1">_________________________</p>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium">联系电话：</p>
+                                <p class="border-b py-1">_________________________</p>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium">地址：</p>
+                                <p class="border-b py-1">_________________________</p>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium">日期：</p>
+                                <p class="border-b py-1">_________________________</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 宠物信息 -->
+                    <div class="mb-8">
+                        <h2 class="text-lg font-bold mb-4 border-b pb-2">宠物信息</h2>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <p class="text-sm font-medium">宠物姓名：</p>
+                                <p class="border-b py-1">_________________________</p>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium">品种：</p>
+                                <p class="border-b py-1">_________________________</p>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium">年龄：</p>
+                                <p class="border-b py-1">_________________________</p>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium">性别：</p>
+                                <p class="border-b py-1">□ 公 □ 母 □ 绝育</p>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium">体重：</p>
+                                <p class="border-b py-1">_________________________ kg</p>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium">毛色：</p>
+                                <p class="border-b py-1">_________________________</p>
+                            </div>
+                            <div class="col-span-2">
+                                <p class="text-sm font-medium">特殊标记：</p>
+                                <p class="border-b py-1">____________________________________________________________</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 主人信息 -->
+                    <div class="mb-8">
+                        <h2 class="text-lg font-bold mb-4 border-b pb-2">主人信息</h2>
+                        <div class="grid grid-cols-2 gap-4">
+                            <div>
+                                <p class="text-sm font-medium">姓名：</p>
+                                <p class="border-b py-1">_________________________</p>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium">联系电话：</p>
+                                <p class="border-b py-1">_________________________</p>
+                            </div>
+                            <div class="col-span-2">
+                                <p class="text-sm font-medium">地址：</p>
+                                <p class="border-b py-1">____________________________________________________________</p>
+                            </div>
+                            <div class="col-span-2">
+                                <p class="text-sm font-medium">紧急联系人：</p>
+                                <p class="border-b py-1">____________________________________________________________</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 就诊原因 -->
+                    <div class="mb-8">
+                        <h2 class="text-lg font-bold mb-4 border-b pb-2">就诊原因</h2>
+                        <p class="border-b py-1 h-20">____________________________________________________________</p>
+                        <p class="border-b py-1 h-20">____________________________________________________________</p>
+                        <p class="border-b py-1 h-20">____________________________________________________________</p>
+                    </div>
+                    
+                    <!-- 服务内容 -->
+                    <div class="mb-8">
+                        <h2 class="text-lg font-bold mb-4 border-b pb-2">服务内容</h2>
+                        <div class="space-y-2">
+                            <div class="flex items-center">
+                                <input type="checkbox" class="mr-2">
+                                <span>一般检查</span>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" class="mr-2">
+                                <span>疫苗接种</span>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" class="mr-2">
+                                <span>血液检查</span>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" class="mr-2">
+                                <span>影像学检查</span>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" class="mr-2">
+                                <span>药物治疗</span>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" class="mr-2">
+                                <span>手术治疗</span>
+                            </div>
+                            <div class="flex items-center">
+                                <input type="checkbox" class="mr-2">
+                                <span>其他服务：_________________________</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 费用预估 -->
+                    <div class="mb-8">
+                        <h2 class="text-lg font-bold mb-4 border-b pb-2">费用预估</h2>
+                        <div class="grid grid-cols-3 gap-4">
+                            <div>
+                                <p class="text-sm font-medium">检查费用：</p>
+                                <p class="border-b py-1">￥_________</p>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium">治疗费用：</p>
+                                <p class="border-b py-1">￥_________</p>
+                            </div>
+                            <div>
+                                <p class="text-sm font-medium">药物费用：</p>
+                                <p class="border-b py-1">￥_________</p>
+                            </div>
+                            <div class="col-span-3">
+                                <p class="text-sm font-medium">其他费用：</p>
+                                <p class="border-b py-1">￥_________</p>
+                            </div>
+                            <div class="col-span-3">
+                                <p class="text-sm font-medium font-bold">总计：</p>
+                                <p class="border-b py-1 text-lg font-bold">￥_________</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 协议条款 -->
+                    <div class="mb-8">
+                        <h2 class="text-lg font-bold mb-4 border-b pb-2">协议条款</h2>
+                        <div class="space-y-4 text-sm">
+                            <p>1. 本人确认所提供的宠物及主人信息真实、准确。</p>
+                            <p>2. 本人同意动物医院对宠物进行必要的检查和治疗。</p>
+                            <p>3. 本人了解宠物医疗存在一定风险，愿意承担相应责任。</p>
+                            <p>4. 本人同意按照医院规定支付相关费用。</p>
+                            <p>5. 如宠物需要住院治疗，本人同意遵守医院的住院管理规定。</p>
+                            <p>6. 本人同意医院在必要时联系紧急联系人。</p>
+                            <p>7. 本协议自双方签字之日起生效。</p>
+                        </div>
+                    </div>
+                    
+                    <!-- 签字确认 -->
+                    <div class="mb-4">
+                        <h2 class="text-lg font-bold mb-4 border-b pb-2">签字确认</h2>
+                        <div class="grid grid-cols-2 gap-8">
+                            <div>
+                                <p class="text-center mb-4">主人签字：</p>
+                                <p class="border-b py-1 h-12"></p>
+                                <p class="text-center mt-2 text-sm">日期：_________</p>
+                            </div>
+                            <div>
+                                <p class="text-center mb-4">医院代表：</p>
+                                <p class="border-b py-1 h-12"></p>
+                                <p class="text-center mt-2 text-sm">日期：_________</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 备注 -->
+                    <div class="mt-8">
+                        <h2 class="text-lg font-bold mb-4 border-b pb-2">备注</h2>
+                        <p class="border-b py-1 h-20">____________________________________________________________</p>
+                        <p class="border-b py-1 h-20">____________________________________________________________</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- 使用说明 -->
+            <div class="bg-white rounded-lg shadow-md p-6">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <i class="fa fa-info-circle mr-2 text-primary"></i>
+                    使用说明
+                </h3>
+                <div class="space-y-4 text-gray-600">
+                    <p><strong>1. 填写要求：</strong>请用黑色或蓝色钢笔填写，确保信息真实、准确、完整。</p>
+                    <p><strong>2. 适用范围：</strong>本协议适用于动物医院常规就诊服务。</p>
+                    <p><strong>3. 注意事项：</strong></p>
+                    <ul class="list-disc pl-6 space-y-1">
+                        <li>请仔细阅读协议条款，如有疑问请向医院工作人员咨询。</li>
+                        <li>特殊治疗项目可能需要签署额外的专项协议。</li>
+                        <li>本协议一式两份，医院和主人各执一份。</li>
+                        <li>请妥善保管本协议，作为就诊记录的重要凭证。</li>
+                    </ul>
+                    <p><strong>4. 紧急情况：</strong>如遇宠物突发疾病或紧急情况，请立即联系医院。</p>
+                </div>
+            </div>
+        </main>
+    </div>
+    
+    <!-- 底部信息 -->
+    <footer class="bg-dark text-white mt-auto py-8 ml-64">
+        <div class="container mx-auto px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h4 class="text-lg font-bold mb-4 flex items-center">
+                        <i class="fa fa-heartbeat mr-2 text-primary"></i>
+                        动物医院模板中心
+                    </h4>
+                    <p class="text-gray-400">
+                        专业提供动物医院各种协议、检查单、单据模板，
+                        为动物医疗行业提供便捷、规范的文档解决方案。
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">快速链接</h4>
+                    <ul class="space-y-2">
+                        <li>
+                            <a href="index.html" class="text-gray-400 hover:text-white transition-all-300">
+                                <i class="fa fa-angle-right mr-1"></i>
+                                首页
+                            </a>
+                        </li>
+                        <li>
+                            <a href="agreement-consultation.html" class="text-gray-400 hover:text-white transition-all-300">
+                                <i class="fa fa-angle-right mr-1"></i>
+                                协议模板
+                            </a>
+                        </li>
+                        <li>
+                            <a href="checkup-general.html" class="text-gray-400 hover:text-white transition-all-300">
+                                <i class="fa fa-angle-right mr-1"></i>
+                                检查单模板
+                            </a>
+                        </li>
+                        <li>
+                            <a href="receipt-invoice.html" class="text-gray-400 hover:text-white transition-all-300">
+                                <i class="fa fa-angle-right mr-1"></i>
+                                单据模板
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-lg font-bold mb-4">联系我们</h4>
+                    <ul class="space-y-2">
+                        <li class="flex items-center text-gray-400">
+                            <i class="fa fa-building w-6"></i>
+                            <span>平武县软件开发有限公司</span>
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fa fa-phone w-6"></i>
+                            <span>18281970402</span>
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fa fa-envelope w-6"></i>
+                            <span>contact@pwsoftware.com</span>
+                        </li>
+                        <li class="flex items-center text-gray-400">
+                            <i class="fa fa-map-marker w-6"></i>
+                            <span>四川省绵阳市平武县</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-t border-gray-700 mt-8 pt-8 text-center text-gray-400">
+                <p>&copy; 2024 动物医院模板中心 - 平武县软件开发有限公司. 保留所有权利.</p>
+                <p class="text-xs mt-2">开发者：平武县软件开发有限公司 | 电话：18281970402</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script src="script.js"></script>
+</body>
+</html>
