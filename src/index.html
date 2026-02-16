@@ -3,396 +3,425 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>登录 - 动物医院单据管理系统</title>
+    <title>动物医院单据管理系统 - 平武县软件开发有限公司</title>
     <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-        
-        .login-container {
-            max-width: 480px;
-            width: 100%;
-            background: #ffffff;
-            border-radius: 12px;
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
-            padding: 40px;
-        }
-        
-        .login-header {
-            text-align: center;
-            margin-bottom: 32px;
-        }
-        
-        .login-header i {
-            font-size: 80px;
-            margin-bottom: 16px;
-            color: #667eea;
-        }
-        
-        .login-header h1 {
-            color: #1a1a2e;
-            font-size: 24px;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-        
-        .login-header p {
-            color: #6b7280;
-            font-size: 14px;
-        }
-        
-        .form-group {
-            margin-bottom: 20px;
-        }
-        
-        .form-group label {
-            display: block;
-            margin-bottom: 8px;
-            color: #374151;
-            font-weight: 500;
-            font-size: 14px;
-        }
-        
-        .form-group input,
-        .form-group select {
-            width: 100%;
-            padding: 12px 14px;
-            border: 1px solid #d1d5db;
-            border-radius: 8px;
-            font-size: 14px;
-            box-sizing: border-box;
-            background: #ffffff;
-            color: #1f2937;
-        }
-        
-        .form-group input:focus,
-        .form-group select:focus {
-            outline: none;
-            border-color: #667eea;
-            background: #ffffff;
-        }
-        
-        .form-group input::placeholder {
-            color: #9ca3af;
-        }
-        
-        .btn-group {
-            display: flex;
-            gap: 10px;
-            margin-top: 16px;
-        }
-        
-        .btn-full {
-            width: 100%;
-            padding: 12px 20px;
-            border: none;
-            border-radius: 8px;
-            font-size: 14px;
-            font-weight: 500;
-            cursor: pointer;
-            background: #667eea;
-            color: white;
-        }
-        
-        .btn-primary {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        }
-        
-        .btn-primary:hover {
-            opacity: 0.9;
-        }
-        
-        .btn-secondary {
-            background: #f3f4f6;
-            color: #4b5563;
-        }
-        
-        .btn-secondary:hover {
-            background: #e5e7eb;
-        }
-        
-        .btn-success {
-            background: #10b981;
-        }
-        
-        .btn-success:hover {
-            background: #059669;
-        }
-        
-        .btn-warning {
-            background: #f59e0b;
-        }
-        
-        .btn-warning:hover {
-            background: #d97706;
-        }
-        
-        .tab-container {
-            margin-bottom: 0;
-        }
-        
-        .tab-buttons {
-            display: flex;
-            gap: 6px;
-            margin-bottom: 24px;
-            background: #f3f4f6;
-            padding: 4px;
-            border-radius: 8px;
-        }
-        
-        .tab-btn {
-            flex: 1;
-            padding: 10px 14px;
-            border: none;
-            background: transparent;
-            color: #6b7280;
-            border-radius: 6px;
-            cursor: pointer;
-            font-size: 14px;
-            font-weight: 500;
-        }
-        
-        .tab-btn:hover {
-            color: #374151;
-            background: rgba(255, 255, 255, 0.5);
-        }
-        
-        .tab-btn.active {
-            background: white;
-            color: #667eea;
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-        }
-        
-        .tab-content {
-            display: none;
-        }
-        
-        .tab-content.active {
-            display: block;
-        }
-        
-        .hidden {
-            display: none !important;
-        }
-        
-        .message {
-            padding: 12px 16px;
-            border-radius: 8px;
-            margin-bottom: 20px;
-            display: none;
-            font-size: 13px;
-            line-height: 1.5;
-            word-break: break-all;
-        }
-        
-        .message.success {
-            background: #d1fae5;
-            color: #065f46;
-            border: 1px solid #6ee7b7;
-        }
-        
-        .message.error {
-            background: #fee2e2;
-            color: #991b1b;
-            border: 1px solid #fca5a5;
-        }
-        
-        .message.show {
-            display: block;
-        }
-        
-        .account-list {
-            max-height: 280px;
-            overflow-y: auto;
-            border: 1px solid #e5e7eb;
-            border-radius: 8px;
-            padding: 8px;
-            margin-bottom: 16px;
-            background: #f9fafb;
-        }
-        
-        .account-list::-webkit-scrollbar {
-            width: 6px;
-        }
-        
-        .account-list::-webkit-scrollbar-track {
-            background: #f1f1f1;
-        }
-        
-        .account-list::-webkit-scrollbar-thumb {
-            background: #c1c1c1;
-            border-radius: 3px;
-        }
-        
-        .account-item {
-            padding: 12px;
-            border-bottom: 1px solid #e5e7eb;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background: white;
-            border-radius: 6px;
-            margin-bottom: 6px;
-        }
-        
-        .account-item:last-child {
-            border-bottom: none;
-            margin-bottom: 0;
-        }
-        
-        .account-info {
-            flex: 1;
-        }
-        
-        .account-name {
-            font-weight: 600;
-            color: #1f2937;
-            font-size: 15px;
-            margin-bottom: 2px;
-        }
-        
-        .account-role {
-            font-size: 12px;
-            color: #6b7280;
-        }
-        
-        .account-actions {
-            display: flex;
-            gap: 6px;
-        }
-        
-        .btn-small {
-            padding: 6px 12px;
-            font-size: 12px;
-            font-weight: 500;
-            border: none;
-            border-radius: 6px;
-            cursor: pointer;
-            background: #ef4444;
-            color: white;
-        }
-        
-        .btn-delete:hover {
-            background: #dc2626;
-        }
-        
-        .file-input {
-            display: none;
-        }
-        
-        .empty-state {
-            text-align: center;
-            padding: 32px 20px;
-            color: #9ca3af;
-        }
-        
-        .empty-state svg {
-            width: 48px;
-            height: 48px;
-            margin-bottom: 12px;
-            opacity: 0.5;
-        }
-    </style>
+    <script src="auth-check.js"></script>
 </head>
 <body>
-    <div class="login-container">
-        <div class="login-header">
-            <i class="fa fa-heartbeat"></i>
-            <h1>动物医院单据系统</h1>
-            <p>请登录或创建账号</p>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <svg width="40" height="40" viewBox="0 0 40 40" fill="none">
+                    <circle cx="20" cy="20" r="18" stroke="url(#gradient)" stroke-width="3"/>
+                    <path d="M12 20C12 16 14 14 16 14C18 14 19 16 19 18" stroke="url(#gradient)" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M28 20C28 16 26 14 24 14C22 14 21 16 21 18" stroke="url(#gradient)" stroke-width="2.5" stroke-linecap="round"/>
+                    <path d="M15 26C15 26 18 28 20 28C22 28 25 26 25 26" stroke="url(#gradient)" stroke-width="2.5" stroke-linecap="round"/>
+                    <defs>
+                        <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                            <stop offset="0%" style="stop-color:#667eea"/>
+                            <stop offset="100%" style="stop-color:#764ba2"/>
+                        </linearGradient>
+                    </defs>
+                </svg>
+                <span>动物医院单据系统</span>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link active">首页</a>
+                <a href="about.html" class="nav-link">关于</a>
+            </div>
         </div>
+    </nav>
 
-        <div class="message" id="message"></div>
-
-        <div class="tab-container">
-            <div class="tab-buttons">
-                <button class="tab-btn active" onclick="switchTab('login')">登录</button>
-                <button class="tab-btn" onclick="switchTab('create')">创建账号</button>
-                <button class="tab-btn" onclick="switchTab('manage')">账号管理</button>
-            </div>
-
-            <div class="tab-content active" id="login-tab">
-                <div class="form-group">
-                    <label>用户名</label>
-                    <input type="text" id="login-username" placeholder="请输入用户名">
+    <header class="hero">
+        <div class="hero-content">
+            <h1>动物医院单据管理系统</h1>
+            <p class="hero-subtitle">24类全场景单据模板 · 在线编辑 · 一键打印</p>
+            <div class="hero-stats">
+                <div class="stat-item">
+                    <span class="stat-number">24</span>
+                    <span class="stat-label">单据模板</span>
                 </div>
-                <div class="form-group">
-                    <label>密码</label>
-                    <input type="password" id="login-password" placeholder="请输入密码">
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <span class="stat-label">可在线编辑</span>
                 </div>
-                <button class="btn-full btn-primary" onclick="login()">登录</button>
-            </div>
-
-            <div class="tab-content" id="create-tab">
-                <div class="form-group">
-                    <label>用户名</label>
-                    <input type="text" id="create-username" placeholder="请输入用户名">
-                </div>
-                <div class="form-group">
-                    <label>密码</label>
-                    <input type="password" id="create-password" placeholder="请输入密码">
-                </div>
-                <div class="form-group">
-                    <label>确认密码</label>
-                    <input type="password" id="create-confirm-password" placeholder="请再次输入密码">
-                </div>
-                <div class="form-group">
-                    <label>角色</label>
-                    <select id="create-role">
-                        <option value="doctor">医生</option>
-                        <option value="admin">管理员</option>
-                    </select>
-                </div>
-                <button class="btn-full btn-primary" onclick="createAccount()">创建账号</button>
-            </div>
-
-            <div class="tab-content" id="manage-tab">
-                <div class="account-list" id="account-list">
-                    <div class="empty-state">
-                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                            <circle cx="9" cy="7" r="4"></circle>
-                            <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                            <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                        </svg>
-                        <p>暂无账号</p>
-                    </div>
-                </div>
-                <div class="btn-group">
-                    <button class="btn-full btn-success" onclick="exportAccounts()">
-                        <svg style="display:inline-block;vertical-align:middle;margin-right:6px;width:16px;height:16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                            <polyline points="7 10 12 15 17 10"></polyline>
-                            <line x1="12" y1="15" x2="12" y2="3"></line>
-                        </svg>
-                        导出账号数据
-                    </button>
-                    <button class="btn-full btn-warning" onclick="importAccounts()">
-                        <svg style="display:inline-block;vertical-align:middle;margin-right:6px;width:16px;height:16px" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                            <polyline points="17 8 12 3 7 8"></polyline>
-                            <line x1="12" y1="3" x2="12" y2="15"></line>
-                        </svg>
-                        导入账号数据
-                    </button>
+                <div class="stat-item">
+                    <span class="stat-number">∞</span>
+                    <span class="stat-label">免费使用</span>
                 </div>
             </div>
         </div>
-    </div>
+        <div class="hero-bg"></div>
+    </header>
+
+    <main class="main-content">
+        <div class="category-tabs">
+            <button class="tab-btn active" data-category="all">全部</button>
+            <button class="tab-btn" data-category="registration">登记类</button>
+            <button class="tab-btn" data-category="examination">检查类</button>
+            <button class="tab-btn" data-category="treatment">治疗类</button>
+            <button class="tab-btn" data-category="agreement">协议类</button>
+            <button class="tab-btn" data-category="record">记录类</button>
+        </div>
+
+        <div class="templates-grid">
+            <div class="template-card" data-category="registration" data-id="visit-registration">
+                <div class="card-icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <rect x="8" y="8" width="32" height="32" rx="4" stroke="currentColor" stroke-width="2"/>
+                        <path d="M16 18H32M16 24H32M16 30H24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3>就诊登记表</h3>
+                <p>宠物及主人基本信息登记</p>
+                <div class="card-actions">
+                    <button class="btn-primary" onclick="openTemplate('visit-registration')">使用模板</button>
+                </div>
+            </div>
+
+            <div class="template-card" data-category="examination" data-id="physical-examination">
+                <div class="card-icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <circle cx="24" cy="24" r="16" stroke="currentColor" stroke-width="2"/>
+                        <path d="M24 14V24L30 30" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3>体格检查报告</h3>
+                <p>全面体格检查记录</p>
+                <div class="card-actions">
+                    <button class="btn-primary" onclick="openTemplate('physical-examination')">使用模板</button>
+                </div>
+            </div>
+
+            <div class="template-card" data-category="examination" data-id="laboratory-test">
+                <div class="card-icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <path d="M12 36V12H36V36H12Z" stroke="currentColor" stroke-width="2"/>
+                        <path d="M18 20L22 24L30 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h3>实验室检查报告</h3>
+                <p>血常规、生化等检查结果</p>
+                <div class="card-actions">
+                    <button class="btn-primary" onclick="openTemplate('laboratory-test')">使用模板</button>
+                </div>
+            </div>
+
+            <div class="template-card" data-category="agreement" data-id="surgery-consent">
+                <div class="card-icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <path d="M24 8L40 24L24 40L8 24L24 8Z" stroke="currentColor" stroke-width="2"/>
+                        <path d="M24 18V30M24 34V36" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3>手术同意书</h3>
+                <p>手术前知情同意</p>
+                <div class="card-actions">
+                    <button class="btn-primary" onclick="openTemplate('surgery-consent')">使用模板</button>
+                </div>
+            </div>
+
+            <div class="template-card" data-category="agreement" data-id="anesthesia-consent">
+                <div class="card-icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="2"/>
+                        <path d="M24 16V32M16 24H32" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3>麻醉同意书</h3>
+                <p>麻醉风险告知</p>
+                <div class="card-actions">
+                    <button class="btn-primary" onclick="openTemplate('anesthesia-consent')">使用模板</button>
+                </div>
+            </div>
+
+            <div class="template-card" data-category="treatment" data-id="medication-prescription">
+                <div class="card-icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <rect x="10" y="14" width="28" height="20" rx="2" stroke="currentColor" stroke-width="2"/>
+                        <path d="M16 20Hares32M16 26H32" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3>用药处方单</h3>
+                <p>药品开具与用药指导</p>
+                <div class="card-actions">
+                    <button class="btn-primary" onclick="openTemplate('medication-prescription')">使用模板</button>
+                </div>
+            </div>
+
+            <div class="template-card" data-category="treatment" data-id="vaccination-record">
+                <div class="card-icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <path d="M24 8V40M8 24H40" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <circle cx="24" cy="24" r="6" stroke="currentColor" stroke-width="2"/>
+                    </svg>
+                </div>
+                <h3>疫苗接种记录</h3>
+                <p>疫苗注射历史记录</p>
+                <div class="card-actions">
+                    <button class="btn-primary" onclick="openTemplate('vaccination-record')">使用模板</button>
+                </div>
+            </div>
+
+            <div class="template-card" data-category="treatment" data-id="deworming-record">
+                <div class="card-icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <circle cx="24" cy="24" r="18" stroke="currentColor" stroke-width="2"/>
+                        <path d="M18 24L22 28L30 20" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h3>驱虫记录单</h3>
+                <p>体内体外驱虫记录</p>
+                <div class="card-actions">
+                    <button class="btn-primary" onclick="openTemplate('deworming-record')">使用模板</button>
+                </div>
+            </div>
+
+            <div class="template-card" data-category="agreement" data-id="hospitalization">
+                <div class="card-icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <rect x="8" y="12" width="32" height="24" rx="2" stroke="currentColor" stroke-width="2"/>
+                        <path d="M8 20H40M8 28H40" stroke="currentColor" stroke-width="=" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3>住院协议书</h3>
+                <p>住院治疗相关协议</p>
+                <div class="card-actions">
+                    <button class="btn-primary" onclick="openTemplate('hospitalization')">使用模板</button>
+                </div>
+            </div>
+
+            <div class="template-card" data-category="record" data-id="nursing-record">
+                <div class="card-icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <path d="M12 8H36V40H12V8Z" stroke="currentColor" stroke-width="2"/>
+                        <path d="M16 16H32M16 22H32M16 28H24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3>护理记录单</h3>
+                <p>日常护理过程记录</p>
+                <div class="card-actions">
+                    <button class="btn-primary" onclick="openTemplate('nursing-record')">使用模板</button>
+                </div>
+            </div>
+
+            <div class="template-card" data-category="record" data-id="discharge-summary">
+                <div class="card-icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <path d="M12 12H36V36H12V12Z" stroke="currentColor" stroke-width="2"/>
+                        <path d="M18 20L22 24L30 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h3>出院小结</h3>
+                <p>出院情况与医嘱</p>
+                <div class="card-actions">
+                    <button class="btn-primary" onclick="openTemplate('discharge-summary')">使用模板</button>
+                </div>
+            </div>
+
+            <div class="template-card" data-category="registration" data-id="payment-invoice">
+                <div class="card-icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <rect x="10" y="8" width="28" height="32" rx="2" stroke="currentColor" stroke-width="2"/>
+                        <path d="M16 16H32M16 22H32M16 28H24" stroke="=" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3>缴费清单</h3>
+                <p>费用明细清单</p>
+                <div class="card-actions">
+                    <button class="btn-primary" onclick="openTemplate('payment-invoice')">使用模板</button>
+                </div>
+            </div>
+
+            <div class="template-card" data-category="agreement" data-id="foster-agreement">
+                <div class="card-icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <path d="M24 8L40 16V32L24 40L8 32V16L24 8Z" stroke="currentColor" stroke-width="2"/>
+                        <path d="M24 16V32" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3>寄养协议</h3>
+                <p>宠物寄养服务协议</p>
+                <div class="card-actions">
+                    <button class="btn-primary" onclick="openTemplate('foster-agreement')">使用模板</button>
+                </div>
+            </div>
+
+            <div class="template-card" data-category="agreement" data-id="euthanasia-consent">
+                <div class="card-icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <circle cx="24" cy="24" r="16" stroke="currentColor" stroke-width="2"/>
+                        <path d="M18 30L30 18M30 30L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3>安乐死同意书</h3>
+                <p>安乐死知情同意</p>
+                <div class="card-actions">
+                    <button class="btn-primary" onclick="openTemplate('euthanasia-consent')">使用模板</button>
+                </div>
+            </div>
+
+            <div class="template-card" data-category="registration" data-id="follow-up">
+                <div class="card-icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <circle cx="24" cy="24" r="16" stroke="currentColor" stroke-width="2"/>
+                        <path d="M24 16V24L30 30" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3>复诊提醒单</h3>
+                <p>复诊时间与注意事项</p>
+                <div class="card-actions">
+                    <button class="btn-primary" onclick="openTemplate('follow-up')">使用模板</button>
+                </div>
+            </div>
+
+            <div class="template-card" data-category="registration" data-id="referral-form">
+                <div class="card-icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <path d="M12 24L20 32L36 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h3>转诊单</h3>
+                <p>转院治疗相关单据</p>
+                <div class="card-actions">
+                    <button class="btn-primary" onclick="openTemplate('referral-form')">使用模板</button>
+                </div>
+            </div>
+
+            <div class="template-card" data-category="examination" data-id="infection-screening">
+                <div class="card-icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <circle cx="24" cy="24" r="16" stroke="currentColor" stroke-width="2"/>
+                        <path d="M18 24C18 20 20 18 24 18C28 18 30 20 30 24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3>传染病筛查报告</h3>
+                <p>传染病检测结果</p>
+                <div class="card-actions">
+                    <button class="btn-primary" onclick="openTemplate('infection-screening')">使用模板</button>
+                </div>
+            </div>
+
+            <div class="template-card" data-category="examination" data-id="allergy-test">
+                <div class="card-icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <rect x="8" y="8" width="32" height="32" rx="4" stroke="currentColor" stroke-width="2"/>
+                        <path d="M16 20L22 26L32 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h3>过敏原检测报告</h3>
+                <p>过敏原筛查结果</p>
+                <div class="card-actions">
+                    <button class="btn-primary" onclick="openTemplate('allergy-test')">使用模板</button>
+                </div>
+            </div>
+
+            <div class="template-card" data-category="examination" data-id="necropsy-report">
+                <div class="card-icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <path d="M12 12H36V36H12V12Z" stroke="currentColor" stroke-width="2"/>
+                        <path d="M16 20H32M16 26H32M16 32H24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3>尸体剖检报告</h3>
+                <p>病理解剖检查报告</p>
+                <div class="card-actions">
+                    <button class="btn-primary" onclick="openTemplate('necropsy-report')">使用模板</button>
+                </div>
+            </div>
+
+            <div class="template-card" data-category="record" data-id="death-certificate">
+                <div class="card-icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <rect x="10" y="8" width="28" height="32" rx="2" stroke="currentColor" stroke-width="2"/>
+                        <path d="M18 20L22 24L30 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </div>
+                <h3>宠物死亡证明</h3>
+                <p>死亡相关证明文件</p>
+                <div class="card-actions">
+                    <button class="btn-primary" onclick="openTemplate('death-certificate')">使用模板</button>
+                </div>
+            </div>
+
+            <div class="template-card" data-category="agreement" data-id="body-disposal">
+                <div class="card-icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <circle cx="24" cy="24" r="16" stroke="currentColor" stroke-width="2"/>
+                        <path d="M18 30L30 18M30 30L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3>尸体处理协议</h3>
+                <p>尸体无害化处理</p>
+                <div class="card-actions">
+                    <button class="btn-primary" onclick="openTemplate('body-disposal')">使用模板</button>
+                </div>
+            </div>
+
+            <div class="template-card" data-category="registration" data-id="insurance-claim">
+                <div class="card-icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <path d="M12 24C12 16 18 10 24 10C30 10 36 16 36 24C36 32 30 38 24 38C18 38 12 32 12 24Z" stroke="currentColor" stroke-width="2"/>
+                        <path d="M20 24C20 21 22 19 24 19C26 19 28 21 28 24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3>保险理赔单</h3>
+                <p>宠物保险理赔申请</p>
+                <div class="card-actions">
+                    <button class="btn-primary" onclick="openTemplate('insurance-claim')">使用模板</button>
+                </div>
+            </div>
+
+            <div class="template-card" data-category="record" data-id="owner-feedback">
+                <div class="card-icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <path d="M12 12H36V32H24L12 40V32V12Z" stroke="currentColor" stroke-width="2"/>
+                        <path d="M16 18H32M16 24H24" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3>主人反馈表</h3>
+                <p>客户意见与建议</p>
+                <div class="card-actions">
+                    <button class="btn-primary" onclick="openTemplate('owner-feedback')">使用模板</button>
+                </div>
+            </div>
+
+            <div class="template-card" data-category="record" data-id="case-summary">
+                <div class="card-icon">
+                    <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+                        <rect x="8" y="8" width="32" height="32" rx="4" stroke="currentColor" stroke-width="2"/>
+                        <path d="M16 16H32M16 22H32M16 28H32" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                    </svg>
+                </div>
+                <h3>病例总结单</h3>
+                <p>完整病例总结</p>
+                <div class="card-actions">
+                    <button class="btn-primary" onclick="openTemplate('case-summary')">使用模板</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-section">
+                <h4>联系方式</h4>
+                <p>电话：18281970402</p>
+                <p>邮箱：zjhwyq123456@qq.com</p>
+            </div>
+            <div class="footer-section">
+                <h4>开发者</h4>
+                <p>平武县软件开发有限公司</p>
+            </div>
+            <div class="footer-section">
+                <h4>关于</h4>
+                <a href="about.html">了解更多</a>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 平武县软件开发有限公司 版权所有</p>
+        </div>
+    </footer>
 
     <script src="script.js"></script>
     <script src="auth.js"></script>
